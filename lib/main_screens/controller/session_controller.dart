@@ -39,7 +39,7 @@ class LoginController {
           prefs.setString('lastName', response['lastName']);
           prefs.setString('email', response['email']);
           prefs.setInt('phone', int.parse(response['phone']));
-          prefs.setInt('appPin', int.parse(response['appPin']));
+          // prefs.setInt('appPin', int.parse(response['appPin']));
           prefs.setBool('enablePin', false);
           prefs.setInt('userid', int.parse(response['userid']));
           prefs.setString('created_at', response['created_at']);

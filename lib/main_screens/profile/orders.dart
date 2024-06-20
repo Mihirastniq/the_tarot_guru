@@ -86,10 +86,10 @@ class _OrderDetailsState extends State<OrderDetails> {
               leading: Builder(
                 builder: (context) => IconButton(
                   onPressed: () {
-                    Scaffold.of(context).openDrawer();
+                    Navigator.pop(context);
                   },
                   icon: Icon(
-                    Icons.segment_rounded,
+                    Icons.arrow_circle_left,
                     color: Colors.white,
                     size: 35,
                   ),

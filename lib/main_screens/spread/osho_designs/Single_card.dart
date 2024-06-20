@@ -94,6 +94,11 @@ class _SingleCardScreenState extends State<SingleCardScreen> with TickerProvider
           card1Status = true;
         }
       });
+      if (card1Status == true) {
+        setState(() {
+          buttonText = 'View Details';
+        });
+      }
     } else {
       print('card is already flipped');
     }

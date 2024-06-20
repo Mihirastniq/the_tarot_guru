@@ -115,6 +115,15 @@ class _DeckScreenState extends State<RiderDeckScreen> {
             child: AppBar(
               backgroundColor: Colors.transparent,
               elevation: 0,
+              leading: IconButton(
+    onPressed: () {
+    Navigator.pop(context);
+    },
+    icon: Icon(
+    Icons.arrow_circle_left,
+    color: Colors.white,
+    size: 35,
+    )),
               title: Text(
                 '${widget.tarotType} Tarot',
                 style: TextStyle(

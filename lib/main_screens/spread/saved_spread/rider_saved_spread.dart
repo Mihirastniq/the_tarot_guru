@@ -3,6 +3,7 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:the_tarot_guru/main_screens/other_screens/rider_saved_spred_details.dart';
 
 class RiderSavedSpreadList extends StatefulWidget {
   const RiderSavedSpreadList({super.key});
@@ -66,10 +67,10 @@ class _RiderSavedSpreadListState extends State<RiderSavedSpreadList> {
               leading: Builder(
                 builder: (context) => IconButton(
                     onPressed: () {
-                      Scaffold.of(context).openDrawer();
+                      Navigator.pop(context);
                     },
                     icon: Icon(
-                      Icons.segment_rounded,
+                      Icons.arrow_circle_left,
                       color: Colors.white,
                       size: 35,
                     )),
@@ -94,8 +95,17 @@ class _RiderSavedSpreadListState extends State<RiderSavedSpreadList> {
               ),
               Container(
                 padding: EdgeInsets.symmetric(horizontal: 15),
-                height: MediaQuery.of(context).size.height - AppBar().preferredSize.height- AppBar().preferredSize.height,
-                child: ListView.builder(
+                height: MediaQuery.of(context).size.height -
+                    AppBar().preferredSize.height -
+                    AppBar().preferredSize.height,
+                child: savedSpreads.isEmpty
+                    ? Center(
+                  child: Text(
+                    'No spreads saved',
+                    style: TextStyle(color: Colors.white, fontSize: 18),
+                  ),
+                )
+                    : ListView.builder(
                   itemCount: savedSpreads.length,
                   itemBuilder: (context, index) {
                     return Container(
@@ -111,14 +121,28 @@ class _RiderSavedSpreadListState extends State<RiderSavedSpreadList> {
                           style: TextStyle(fontWeight: FontWeight.bold),
                         ),
                         subtitle: Text(savedSpreads[index]['spreadName']),
+                        // Add onTap handler to navigate to spread details
                         onTap: () {
-
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) =>
+                                  RiderSavedSpreadDetails(
+                                    selectedCards: savedSpreads[index]
+                                    ['selectedCardIds'],
+                                    tarotType: savedSpreads[index]
+                                    ['tarotType'],
+                                    spreadName: savedSpreads[index]
+                                    ['spreadName'],
+                                  ),
+                            ),
+                          );
                         },
                       ),
                     );
                   },
                 ),
-              )
+              ),
             ],
           )
         ],

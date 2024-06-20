@@ -62,17 +62,15 @@ class _AppSelectState extends State<RiderWaiteTarot> with TickerProviderStateMix
             left: 0,
             right: 0,
             child: AppBar(
-              leading: Builder(
-                builder: (context) => IconButton(
-                    onPressed: () {
-                      Scaffold.of(context).openDrawer();
-                    },
-                    icon: Icon(
-                      Icons.segment_rounded,
-                      color: Colors.white,
-                      size: 35,
-                    )),
-              ),
+              leading: IconButton(
+                  onPressed: () {
+                    Navigator.pop(context);
+                  },
+                  icon: Icon(
+                    Icons.arrow_circle_left,
+                    color: Colors.white,
+                    size: 35,
+                  )),
               backgroundColor: Colors.transparent,
               elevation: 0,
               title: Text(

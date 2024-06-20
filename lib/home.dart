@@ -68,7 +68,7 @@ class _AppSelectState extends State<AppSelect> with SingleTickerProviderStateMix
       var response = await http.post(Uri.parse(url), body: {
         'user_id': userId.toString(),
       });
-
+      print(response.body);
       if (response.statusCode == 200) {
         var responseData = json.decode(response.body);
 
@@ -89,6 +89,12 @@ class _AppSelectState extends State<AppSelect> with SingleTickerProviderStateMix
           createdAt = userDetails['created_at'] ?? '';
           prefs.setString('created_at', createdAt);
         });
+
+        print(SubscriptionStatus);
+        print(freebyadmin);
+        print(freewarning);
+        print(trialperiod);
+        print(accountStatus);
 
         if (isWithin48Hours()) {
           startCountdown();

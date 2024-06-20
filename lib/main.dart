@@ -6,11 +6,11 @@ import 'package:the_tarot_guru/splash_screen.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'main_screens/controller/language_controller/language_change_handler.dart';
-// import 'package:flutter_windowmanager/flutter_windowmanager.dart';
+import 'package:flutter_windowmanager/flutter_windowmanager.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  // await FlutterWindowManager.addFlags(FlutterWindowManager.FLAG_SECURE);
+  await FlutterWindowManager.addFlags(FlutterWindowManager.FLAG_SECURE);
   SharedPreferences sp = await SharedPreferences.getInstance();
   final String language = sp.getString('lang') ?? 'en';
   runApp(MyApp(local: language));

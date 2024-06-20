@@ -369,10 +369,10 @@ class _UserAddressesState extends State<UserAddresses> {
               leading: Builder(
                 builder: (context) => IconButton(
                     onPressed: () {
-                      Scaffold.of(context).openDrawer();
+                      Navigator.pop(context);
                     },
                     icon: Icon(
-                      Icons.segment_rounded,
+                      Icons.arrow_circle_left,
                       color: Colors.white,
                       size: 35,
                     )),
@@ -590,10 +590,10 @@ class _OrdersScreenState extends State<OrdersScreen> {
               leading: Builder(
                 builder: (context) => IconButton(
                   onPressed: () {
-                    Scaffold.of(context).openDrawer();
+                    Navigator.pop(context);
                   },
                   icon: Icon(
-                    Icons.segment_rounded,
+                    Icons.arrow_circle_left,
                     color: Colors.white,
                     size: 35,
                   ),

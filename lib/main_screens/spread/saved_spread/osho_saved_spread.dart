@@ -13,7 +13,6 @@ class OshoSavedSpreadList extends StatefulWidget {
 }
 
 class _OshoSavedSpreadListState extends State<OshoSavedSpreadList> {
-
   List<Map<String, dynamic>> savedSpreads = [];
 
   @override
@@ -28,13 +27,13 @@ class _OshoSavedSpreadListState extends State<OshoSavedSpreadList> {
     if (savedSpreadStrings != null) {
       setState(() {
         savedSpreads = savedSpreadStrings
-            .map<Map<String, dynamic>>((spreadString) => jsonDecode(spreadString))
+            .map<Map<String, dynamic>>(
+                (spreadString) => jsonDecode(spreadString))
             .where((spread) => spread['tarotType'] == 'Osho Zen')
             .toList();
       });
     }
   }
-
 
   @override
   Widget build(BuildContext context) {
@@ -69,10 +68,10 @@ class _OshoSavedSpreadListState extends State<OshoSavedSpreadList> {
               leading: Builder(
                 builder: (context) => IconButton(
                     onPressed: () {
-                      Scaffold.of(context).openDrawer();
+                      Navigator.pop(context);
                     },
                     icon: Icon(
-                      Icons.segment_rounded,
+                      Icons.arrow_circle_left,
                       color: Colors.white,
                       size: 35,
                     )),
@@ -97,38 +96,56 @@ class _OshoSavedSpreadListState extends State<OshoSavedSpreadList> {
               ),
               Container(
                 padding: EdgeInsets.symmetric(horizontal: 15),
-                height: MediaQuery.of(context).size.height - AppBar().preferredSize.height- AppBar().preferredSize.height,
-                child: ListView.builder(
-                  itemCount: savedSpreads.length,
-                  itemBuilder: (context, index) {
-                    return Container(
-                      margin: EdgeInsets.symmetric(vertical: 8.0),
-                      padding: EdgeInsets.all(12.0),
-                      decoration: BoxDecoration(
-                        color: Colors.white,
-                        borderRadius: BorderRadius.circular(10.0),
-                      ),
-                      child: ListTile(
-                        title: Text(
-                          savedSpreads[index]['name'],
-                          style: TextStyle(fontWeight: FontWeight.bold),
+                height: MediaQuery.of(context).size.height -
+                    AppBar().preferredSize.height -
+                    AppBar().preferredSize.height,
+                child: savedSpreads.isEmpty
+                    ? Center(
+                        child: Text(
+                          'No spreads saved',
+                          style: TextStyle(color: Colors.white, fontSize: 18),
                         ),
-                        subtitle: Text(savedSpreads[index]['spreadName']),
-                        // Add onTap handler to navigate to spread details
-                        onTap: () {
-                          Navigator.push(
-                            context,
-                            MaterialPageRoute(builder: (context) => OshoSavedSpreadDetails(selectedCards: savedSpreads[index]['selectedCardIds'], tarotType: savedSpreads[index]['tarotType'], spreadName: savedSpreads[index]['spreadName']),
+                      )
+                    : ListView.builder(
+                        itemCount: savedSpreads.length,
+                        itemBuilder: (context, index) {
+                          return Container(
+                            margin: EdgeInsets.symmetric(vertical: 8.0),
+                            padding: EdgeInsets.all(12.0),
+                            decoration: BoxDecoration(
+                              color: Colors.white,
+                              borderRadius: BorderRadius.circular(10.0),
+                            ),
+                            child: ListTile(
+                              title: Text(
+                                savedSpreads[index]['name'],
+                                style: TextStyle(fontWeight: FontWeight.bold),
+                              ),
+                              subtitle: Text(savedSpreads[index]['spreadName']),
+                              // Add onTap handler to navigate to spread details
+                              onTap: () {
+                                Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                    builder: (context) =>
+                                        OshoSavedSpreadDetails(
+                                      selectedCards: savedSpreads[index]
+                                          ['selectedCardIds'],
+                                      tarotType: savedSpreads[index]
+                                          ['tarotType'],
+                                      spreadName: savedSpreads[index]
+                                          ['spreadName'],
+                                    ),
+                                  ),
+                                );
+                              },
                             ),
                           );
                         },
                       ),
-                    );
-                  },
-                ),
-              )
+              ),
             ],
-          )
+          ),
         ],
       ),
     );

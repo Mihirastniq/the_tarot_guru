@@ -67,7 +67,7 @@ class _ProfileState extends State<Profile> {
                       Navigator.pop(context);
                     },
                     icon: Icon(
-                      Icons.arrow_back_outlined,
+                      Icons.arrow_circle_left,
                       color: Colors.white,
                       size: 35,
                     )),

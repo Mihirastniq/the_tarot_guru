@@ -85,6 +85,23 @@ class _AboutOshoZenState extends State<AboutOshoZen> {
                 opacity: const AlwaysStoppedAnimation(.3),
               ),
             ),
+            Positioned(
+              top: 0,
+              left: 0,
+              right: 0,
+              child: AppBar(
+                backgroundColor: Colors.transparent,
+                elevation: 0,
+                leading: IconButton(
+                  icon: Icon(Icons.arrow_circle_left,size: 40,),
+                  color: Colors.white,
+                  onPressed: () {
+                    Navigator.pop(context,true);
+                  },
+                ),
+
+              ),
+            ),
             Center(
               child: Container(
                 padding: EdgeInsets.all(15),
