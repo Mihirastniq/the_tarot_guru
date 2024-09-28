@@ -3,8 +3,10 @@ import 'package:flutter_svg/svg.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:the_tarot_guru/main_screens/controller/registration_controller.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
-import 'package:the_tarot_guru/main_screens/login/loginnew.dart';
+import 'package:the_tarot_guru/main_screens/login/login.dart';
 import 'package:intl_phone_field/intl_phone_field.dart';
+
+import '../warnings/please_wait_popup.dart';
 
 class RegisterNew extends StatefulWidget {
   const RegisterNew({Key? key}) : super(key: key);
@@ -20,6 +22,22 @@ class _RegisterNewState extends State<RegisterNew> {
   String countryCode = '';
   String countryFrom = '';
   String? phoneNumber;
+
+  bool isLoading = false;
+
+  Future<void> _showPleaseWaitDialog() async {
+    return showDialog<void>(
+      context: context,
+      barrierDismissible: false,
+      builder: (BuildContext context) {
+        return PleaseWaitDialog();
+      },
+    );
+  }
+
+  void _hidePleaseWaitDialog() {
+    Navigator.of(context).pop();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -114,8 +132,10 @@ class _RegisterNewState extends State<RegisterNew> {
                     width: double.infinity,
                     child: ElevatedButton(
                       onPressed: phoneNumber != null ? () {
-                        String countryCode = phoneNumber!.substring(0, phoneNumber!.length - 10);
-                        String phone = phoneNumber!.substring(phoneNumber!.length - 10);
+
+
+                        String? phone = phoneNumber;
+
                         Navigator.push(
                           context,
                           MaterialPageRoute(builder: (context) => RegisterUserDetails(countryCode: countryCode, phoneNumber: phone, country: countryFrom)),
@@ -171,7 +191,21 @@ class _RegisterUserState extends State<RegisterUserDetails> {
   bool _passwordVisible = false;
   bool _confirmPasswordVisible = false;
 
+  bool isLoading = false;
 
+  Future<void> _showPleaseWaitDialog() async {
+    return showDialog<void>(
+      context: context,
+      barrierDismissible: false,
+      builder: (BuildContext context) {
+        return PleaseWaitDialog();
+      },
+    );
+  }
+
+  void _hidePleaseWaitDialog() {
+    Navigator.of(context).pop();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -347,7 +381,7 @@ class _RegisterUserState extends State<RegisterUserDetails> {
     );
   }
   Widget FirstName(Size size) {
-    var requiredfield;
+
     return Container(
       alignment: Alignment.center,
       height: size.height / 12,
@@ -407,7 +441,6 @@ class _RegisterUserState extends State<RegisterUserDetails> {
       ),
     );
   }
-
   Widget LastName(Size size) {
     return Container(
       alignment: Alignment.center,
@@ -737,7 +770,6 @@ class _RegisterUserState extends State<RegisterUserDetails> {
       ),
     );
   }
-
   Widget ConfirmPassword(Size size) {
     return Container(
       alignment: Alignment.center,
@@ -895,6 +927,12 @@ class _RegisterUserState extends State<RegisterUserDetails> {
             _registrationController.phone_number.text = widget.phoneNumber;
             _registrationController.country_code.text = widget.countryCode;
             _registrationController.country.text = widget.country;
+            setState(() {
+              isLoading = true;
+            });
+
+            _showPleaseWaitDialog();
+
             _registrationController.registerFunction(context);
           }
         });
@@ -908,7 +946,7 @@ class _RegisterUserState extends State<RegisterUserDetails> {
           color: const Color(0xFFFFFFFF),
         ),
         child: Text(
-          '${AppLocalizations.of(context)!.singin}',
+          '${AppLocalizations.of(context)!.signup}',
           style: GoogleFonts.inter(
             fontSize: 22.0,
             color: Colors.black,
@@ -955,7 +993,7 @@ class _RegisterUserState extends State<RegisterUserDetails> {
           ),
           children: [
             TextSpan(
-              text: '${AppLocalizations.of(context)!.donthaveaccountlabel} ',
+              text: '${AppLocalizations.of(context)!.donthaveaccountlabel}',
               style: GoogleFonts.nunito(
                 fontWeight: FontWeight.w600,
               ),

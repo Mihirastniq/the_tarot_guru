@@ -183,5 +183,9 @@
   "helpandsupportcontactustext1": "support@thetarotguru.com",
   "helpandsupportcontactustext2label": "फोन: ",
   "helpandsupportcontactustext2": "+91 98250 38362",
-  "selectfontsizelabel": "फ़ॉन्ट माप चुनें"
+  "selectfontsizelabel": "फ़ॉन्ट माप चुनें",
+  "sprecialpredictionlabel": "स्पेशल प्रिडिक्शन",
+  "learninglabel": "सीखना शुरू करें",
+  "oshodetailformtitle": "आइए शुरू करें",
+  "oshodetailformsubtitle": "कृपया बुनियादी विवरण दें"
 }

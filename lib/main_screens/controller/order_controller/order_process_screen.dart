@@ -195,7 +195,6 @@ class BillingInformation extends StatefulWidget {
 
 class _BillingInformationState extends State<BillingInformation> {
   late SharedPreferences _prefs;
-  String _billingName = '';
   List<Map<String, dynamic>> _addresses = [];
   int _selectedAddressIndex = 0; // Add this line
 
@@ -434,8 +433,7 @@ class _CheckOutScreenState extends State<CheckOutScreen> {
   }
 
   void _handlePaymentSuccess(PaymentSuccessResponse response) async {
-    String apiKey = 'rzp_live_BOSf3y7tudC48z';
-    String? paymentId = response.paymentId;
+
     var url = 'https://thetarotguru.com/tarotapi/orderHandler.php';
 
     // Create a list to store the products
@@ -488,7 +486,6 @@ class _CheckOutScreenState extends State<CheckOutScreen> {
   }
 
   void _handleExternalWallet(ExternalWalletResponse response) {
-    // Navigate back to subscription screen
     Navigator.pop(context);
   }
 

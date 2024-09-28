@@ -502,7 +502,6 @@ Widget build(BuildContext context) {
 
   double screenWidth = MediaQuery.of(context).size.width * 0.9;
   double screenHeight = MediaQuery.of(context).size.height * 0.7;
-  double containerHeight = screenHeight / 7;
   double imageAspectRatio = 2600 / 1480;
 
   double containerWidth = screenWidth / 7;

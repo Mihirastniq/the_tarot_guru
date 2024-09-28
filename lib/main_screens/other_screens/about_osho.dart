@@ -122,10 +122,10 @@ class _AboutOshoZenState extends State<AboutOshoZen> {
                           ],
                         ),
                         SizedBox(height: 10),
-                        Text(_title ?? 'Loading...',
+                        Text(_title,
                             style: _getTitleTextStyle(context)),
                         SizedBox(height: 10),
-                        Text(_text ?? 'Loading...',
+                        Text(_text,
                             style: _getCustomTextStyle(context)),
                         SizedBox(height: 10),
                         Row(

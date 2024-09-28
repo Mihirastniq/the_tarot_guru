@@ -2,7 +2,6 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flip_card/flip_card_controller.dart';
 import 'package:flutter/services.dart';
-import 'package:the_tarot_guru/main_screens/controller/audio/audio_controller.dart';
 import 'package:the_tarot_guru/main_screens/controller/functions.dart';
 import 'package:the_tarot_guru/main_screens/reuseable_blocks.dart';
 import 'package:the_tarot_guru/main_screens/spread/rider_spread_details.dart';
@@ -382,7 +381,6 @@ class _RiderNineCardScreenState extends State<RiderNineCardScreen> {
     // Define screen dimensions and container height
     double screenWidth = MediaQuery.of(context).size.width * 0.9;
     double screenHeight = MediaQuery.of(context).size.height * 0.7;
-    double containerHeight = screenHeight / 7;
     double imageAspectRatio = 2600 / 1480;
 
     double containerWidth = screenWidth / 6 - 10;

@@ -1,10 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:the_tarot_guru/main_screens/other_screens/about_rider.dart';
+import 'package:the_tarot_guru/main_screens/special_prediction/rider/rider_warning_note.dart';
 import 'package:the_tarot_guru/main_screens/spread/rider_new_spread.dart';
 import 'package:the_tarot_guru/main_screens/spread/saved_spread/rider_saved_spread.dart';
 import 'deck/rider_option_deck.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+
+import 'learning/rider/rider_welcome_screen.dart';
 
 class RiderWaiteTarot extends StatefulWidget {
   @override
@@ -30,7 +33,7 @@ class _AppSelectState extends State<RiderWaiteTarot> with TickerProviderStateMix
       TitleFontsSize = prefs.getDouble('TitleFontSize') ?? 23;
       SubTitleFontsSize = prefs.getDouble('SubtitleFontSize') ?? 18;
       ContentFontsSize = prefs.getDouble('ContentFontSize') ?? 16;
-      ButtonFontsSize = prefs.getDouble('ButtonFontSize') ?? 10;
+      ButtonFontsSize = prefs.getDouble('ButtonFontSize') ?? 18;
     });
   }
   @override
@@ -185,6 +188,44 @@ class _AppSelectState extends State<RiderWaiteTarot> with TickerProviderStateMix
                                     );
                                   },
                                   text: "${AppLocalizations.of(context)!.aboutriderwaite}",
+                                  color1: Color(0xFF32C0D4),
+                                  color2: Color(0xFF00A7BE),
+                                  opacity: 0.9,
+                                  imagePath:'assets/images/demoimg/logo.png'
+                              ),
+                              SizedBox(
+                                height: 15,
+                              ),
+                              _buildButton(
+                                  onPressed: () {
+                                    Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                        builder: (context) =>
+                                            RiderWaiteSpecialPredictionWarningScreen(),
+                                      ),
+                                    );
+                                  },
+                                  text: "${AppLocalizations.of(context)!.sprecialpredictionlabel}",
+                                  color1: Color(0xFF32C0D4),
+                                  color2: Color(0xFF00A7BE),
+                                  opacity: 0.9,
+                                  imagePath:'assets/images/demoimg/logo.png'
+                              ),
+                              SizedBox(
+                                height: 15,
+                              ),
+                              _buildButton(
+                                  onPressed: () {
+                                    Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                        builder: (context) =>
+                                            RiderWaiteLearningWelcomeScreen(),
+                                      ),
+                                    );
+                                  },
+                                  text: "${AppLocalizations.of(context)!.learninglabel}",
                                   color1: Color(0xFF32C0D4),
                                   color2: Color(0xFF00A7BE),
                                   opacity: 0.9,

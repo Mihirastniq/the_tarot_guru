@@ -15,7 +15,7 @@ class SubscriptionExpire extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Dialog(
-      backgroundColor: Color(0xFFF4E4BD),
+      backgroundColor: const Color(0xFFF4E4BD),
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(20.0),
       ),
@@ -37,31 +37,31 @@ class SubscriptionExpire extends StatelessWidget {
                   color: Colors.red,
                   size: MediaQuery.of(context).size.width * 0.2,
                 ),
-                SizedBox(height: 20),
+                const SizedBox(height: 20),
                 Text(
                   title,
-                  style: TextStyle(color: Colors.black, fontSize: 21),
+                  style: const TextStyle(color: Colors.black, fontSize: 21),
                 ),
-                SizedBox(height: 20),
+                const SizedBox(height: 20),
                 Text(
                   message,
                   textAlign: TextAlign.center,
-                  style: TextStyle(color: Colors.black, fontSize: 19),
+                  style: const TextStyle(color: Colors.black, fontSize: 19),
                 ),
-                SizedBox(height: 20),
+                const SizedBox(height: 20),
                 GestureDetector(
                   onTap: onPressed,
                   child: Container(
-                    padding: EdgeInsets.symmetric(horizontal: 25),
+                    padding: const EdgeInsets.symmetric(horizontal: 25),
                     child: Column(
                       children: [
                         SizedBox(
                           width: double.infinity,
                           height: 60.0,
                           child: Container(
-                            padding: EdgeInsets.all(20.0),
+                            padding: const EdgeInsets.all(20.0),
                             decoration: BoxDecoration(
-                              gradient: LinearGradient(
+                              gradient: const LinearGradient(
                                 colors: [
                                   Color(0xFF8D7F55),
                                   Color(0xFF8D7F55),
@@ -78,7 +78,7 @@ class SubscriptionExpire extends StatelessWidget {
                                   borderRadius: BorderRadius.circular(10.0),
                                 ),
                               ),
-                              child: Text(
+                              child: const Text(
                                 'Help & Support',
                                 style: TextStyle(
                                   color: Colors.white,
@@ -89,7 +89,7 @@ class SubscriptionExpire extends StatelessWidget {
                             ),
                           ),
                         ),
-                        SizedBox(height: 20),
+                        const SizedBox(height: 20),
                       ],
                     ),
                   ),
@@ -118,7 +118,7 @@ class AccountBlocked extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Dialog(
-      backgroundColor: Color(0xFFF4E4BD),
+      backgroundColor: const Color(0xFFF4E4BD),
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(20.0),
       ),
@@ -140,31 +140,31 @@ class AccountBlocked extends StatelessWidget {
                   color: Colors.red,
                   size: MediaQuery.of(context).size.width * 0.2,
                 ),
-                SizedBox(height: 20),
+                const SizedBox(height: 20),
                 Text(
                   title,
-                  style: TextStyle(color: Colors.black, fontSize: 21),
+                  style: const TextStyle(color: Colors.black, fontSize: 21),
                 ),
-                SizedBox(height: 20),
+                const SizedBox(height: 20),
                 Text(
                   message,
                   textAlign: TextAlign.center,
-                  style: TextStyle(color: Colors.black, fontSize: 19),
+                  style: const TextStyle(color: Colors.black, fontSize: 19),
                 ),
-                SizedBox(height: 20),
+                const SizedBox(height: 20),
                 GestureDetector(
                   onTap: onPressed,
                   child: Container(
-                    padding: EdgeInsets.symmetric(horizontal: 25),
+                    padding: const EdgeInsets.symmetric(horizontal: 25),
                     child: Column(
                       children: [
                         SizedBox(
                           width: double.infinity,
                           height: 60.0,
                           child: Container(
-                            padding: EdgeInsets.all(20.0),
+                            padding: const EdgeInsets.all(20.0),
                             decoration: BoxDecoration(
-                              gradient: LinearGradient(
+                              gradient: const LinearGradient(
                                 colors: [
                                   Color(0xFF8D7F55),
                                   Color(0xFF8D7F55),
@@ -181,7 +181,7 @@ class AccountBlocked extends StatelessWidget {
                                   borderRadius: BorderRadius.circular(10.0),
                                 ),
                               ),
-                              child: Text(
+                              child: const Text(
                                 'Help & Support',
                                 style: TextStyle(
                                   color: Colors.white,
@@ -192,7 +192,7 @@ class AccountBlocked extends StatelessWidget {
                             ),
                           ),
                         ),
-                        SizedBox(height: 20),
+                        const SizedBox(height: 20),
                       ],
                     ),
                   ),

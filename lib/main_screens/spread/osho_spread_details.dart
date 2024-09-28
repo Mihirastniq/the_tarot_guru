@@ -98,7 +98,6 @@ class _TheSpreadDetailsScreenState extends State<TheSpreadDetailsScreen> {
   Widget build(BuildContext context) {
 
     double screenWidth = MediaQuery.of(context).size.width * 0.9;
-    double screenHeight = MediaQuery.of(context).size.height * 0.7;
     double imageAspectRatio = 671 / 457;
 
     double containerWidth = screenWidth/1.5 - 5;

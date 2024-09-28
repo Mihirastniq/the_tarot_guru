@@ -36,16 +36,15 @@ class _SplashScreenState extends State<SplashScreen> {
   Widget build(BuildContext context) {
 
     Timer(
-      Duration(seconds: 6),
+      const Duration(seconds: 6),
           () async {
         final SharedPreferences prefs = await SharedPreferences.getInstance();
         bool isLoggedIn = prefs.getBool("isLogin") ?? false;
-        bool isPinEnabled = prefs.getBool("enablePin") ?? true;
 
         if (isLoggedIn) {
           Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => AppSelect()));
         } else {
-          Navigator.push(context, MaterialPageRoute(builder: (context) => SplashView()));
+          Navigator.push(context, MaterialPageRoute(builder: (context) => const SplashView()));
         }
       },
     );
@@ -55,7 +54,7 @@ class _SplashScreenState extends State<SplashScreen> {
         fit: StackFit.expand,
         children: <Widget>[
           Container(
-            decoration: BoxDecoration(
+            decoration: const BoxDecoration(
               gradient: LinearGradient(
                 begin: Alignment.topCenter,
                 end: Alignment.bottomCenter,
@@ -76,7 +75,7 @@ class _SplashScreenState extends State<SplashScreen> {
           Center(
             child: Container(
               width: MediaQuery.sizeOf(context).width*0.7,
-              decoration: BoxDecoration(
+              decoration: const BoxDecoration(
                 color: Colors.transparent,
                 shape: BoxShape.circle,
               ),
@@ -90,7 +89,7 @@ class _SplashScreenState extends State<SplashScreen> {
                       child: Image.asset('assets/images/intro/logo.png'),
                     ),
                     Text(
-                        "${AppLocalizations.of(context)!.punchline}",
+                        '${AppLocalizations.of(context)!.punchline}',
                         textAlign: TextAlign.center,
                         style: _getTitleTextStyle(context)
                     ),

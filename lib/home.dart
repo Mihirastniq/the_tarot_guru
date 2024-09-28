@@ -34,7 +34,7 @@ class _AppSelectState extends State<AppSelect> with SingleTickerProviderStateMix
   late double TitleFontsSize = 23;
   late double SubTitleFontsSize = 18;
   late double ContentFontsSize = 16;
-  late double ButtonFontsSize = 10;
+  late double ButtonFontsSize = 15;
 
   Timer? _timer;
   String remainingTime = '';
@@ -55,7 +55,7 @@ class _AppSelectState extends State<AppSelect> with SingleTickerProviderStateMix
       TitleFontsSize = prefs.getDouble('TitleFontSize') ?? 23;
       SubTitleFontsSize = prefs.getDouble('SubtitleFontSize') ?? 18;
       ContentFontsSize = prefs.getDouble('ContentFontSize') ?? 16;
-      ButtonFontsSize = prefs.getDouble('ButtonFontSize') ?? 10;
+      ButtonFontsSize = prefs.getDouble('ButtonFontSize') ?? 18;
     });
   }
 
@@ -68,7 +68,6 @@ class _AppSelectState extends State<AppSelect> with SingleTickerProviderStateMix
       var response = await http.post(Uri.parse(url), body: {
         'user_id': userId.toString(),
       });
-      print(response.body);
       if (response.statusCode == 200) {
         var responseData = json.decode(response.body);
 
@@ -90,11 +89,7 @@ class _AppSelectState extends State<AppSelect> with SingleTickerProviderStateMix
           prefs.setString('created_at', createdAt);
         });
 
-        print(SubscriptionStatus);
-        print(freebyadmin);
-        print(freewarning);
-        print(trialperiod);
-        print(accountStatus);
+
 
         if (isWithin48Hours()) {
           startCountdown();
@@ -374,7 +369,7 @@ class _AppSelectState extends State<AppSelect> with SingleTickerProviderStateMix
                                 width: 100,
                                 child: Image.asset('assets/images/cards/osho.jpg',width: 50,height: 50,),
                               ),
-                              Container(
+                              SizedBox(
                                 width: MediaQuery.of(context).size.width * 0.4,
                                 child: Text('${AppLocalizations.of(context)!.oshotitle}',style: TextStyle(color: Colors.white,fontSize: ButtonFontsSize,fontWeight: FontWeight.w800),),
                               )
@@ -511,4 +506,7 @@ class _AppSelectState extends State<AppSelect> with SingleTickerProviderStateMix
       ),
     );
   }
+}
+
+class $ {
 }

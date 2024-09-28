@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
-import 'package:the_tarot_guru/main_screens/Login/loginnew.dart';
-import 'package:the_tarot_guru/main_screens/Register/registernew.dart';
+import 'package:the_tarot_guru/main_screens/Login/login.dart';
+import 'package:the_tarot_guru/main_screens/Register/register.dart';
 
 class SplashView extends StatefulWidget {
   const SplashView({Key? key})
@@ -21,7 +21,7 @@ class _SplashViewState extends State<SplashView> {
       body: Stack(
         children: [
           Container(
-            decoration: BoxDecoration(
+            decoration: const BoxDecoration(
               gradient: LinearGradient(
                 begin: Alignment.topCenter,
                 end: Alignment.bottomCenter,
@@ -72,14 +72,14 @@ class _SplashViewState extends State<SplashView> {
                       fit: BoxFit.cover,
                     ),
                   ),
-                  Padding(
+                  const Padding(
                     padding: EdgeInsets.only(top: 40.0, bottom: 8.0),
                     child: Text(
                       "The Tarot Guru",
                       style: TextStyle(fontSize: 25.0,color: Colors.white, fontWeight: FontWeight.bold),
                     ),
                   ),
-                  Padding(
+                  const Padding(
                     padding: EdgeInsets.only(left: 64, right: 64),
                     child: Text(
                       "Unlock the power of tarot for self-reflection and guidance. Journey through the symbolism of ancient wisdom.",
@@ -89,7 +89,7 @@ class _SplashViewState extends State<SplashView> {
                       ),
                     ),
                   ),
-                  SizedBox(
+                  const SizedBox(
                     height: 48,
                   ),
                   Padding(
@@ -97,11 +97,11 @@ class _SplashViewState extends State<SplashView> {
                         bottom: MediaQuery.of(context).padding.bottom + 16),
                     child: InkWell(
                       onTap: () {
-                        Navigator.push(context, MaterialPageRoute(builder: (context) => WelcomeTwo()));
+                        Navigator.push(context, MaterialPageRoute(builder: (context) => const WelcomeTwo()));
                       },
                       child: Container(
                         height: 58,
-                        padding: EdgeInsets.only(
+                        padding: const EdgeInsets.only(
                           left: 56.0,
                           right: 56.0,
                           top: 16,
@@ -109,7 +109,7 @@ class _SplashViewState extends State<SplashView> {
                         ),
                         decoration: BoxDecoration(
                           borderRadius: BorderRadius.circular(38.0),
-                          gradient: LinearGradient(
+                          gradient: const LinearGradient(
                             begin: Alignment.topCenter,
                             end: Alignment.bottomCenter,
                             colors: [
@@ -119,14 +119,14 @@ class _SplashViewState extends State<SplashView> {
                           ),
                           boxShadow: [
                             BoxShadow(
-                              color: Color(0xFFDA22FF).withOpacity(0.5),
+                              color: const Color(0xFFDA22FF).withOpacity(0.5),
                               spreadRadius: 2,
                               blurRadius: 10,
-                              offset: Offset(0, 3),
+                              offset: const Offset(0, 3),
                             ),
                           ],
                         ),
-                        child: Text(
+                        child: const Text(
                           "Let's begin",
                           style: TextStyle(
                             fontSize: 18,
@@ -162,7 +162,7 @@ class _WelcomeTwoState extends State<WelcomeTwo> {
       body: Stack(
         children: [
           Container(
-            decoration: BoxDecoration(
+            decoration: const BoxDecoration(
               gradient: LinearGradient(
                 begin: Alignment.topCenter,
                 end: Alignment.bottomCenter,
@@ -206,7 +206,7 @@ class _WelcomeTwoState extends State<WelcomeTwo> {
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 Container(
-                  constraints: BoxConstraints(maxWidth: 350, maxHeight: 350),
+                  constraints: const BoxConstraints(maxWidth: 350, maxHeight: 350),
                   child: Image.asset(
                     'assets/images/intro/logo.png',
                     width: 200,
@@ -214,8 +214,8 @@ class _WelcomeTwoState extends State<WelcomeTwo> {
                   ),
                 ),
                 Container(
-                  margin: EdgeInsets.fromLTRB(0, 15, 0, 0),
-                  child: Text(
+                  margin: const EdgeInsets.fromLTRB(0, 15, 0, 0),
+                  child: const Text(
                     "Welcome to Tarot Guru,",
                     style: TextStyle(
                       fontSize: 25.0,
@@ -226,58 +226,67 @@ class _WelcomeTwoState extends State<WelcomeTwo> {
                 ),
                 Padding(
                   padding:
-                  EdgeInsets.only(left: 64, right: 64, top: 16, bottom: 16),
+                  const EdgeInsets.only(left: 64, right: 64, top: 16, bottom: 16),
                   child: Text(
                     "Know your past, recognize your present and create your future. Know the answer to every question of your life through Tarot cards.",
                     textAlign: TextAlign.center,
                     style: _getTitleTextStyle(context),
                   ),
                 ),
-                SizedBox(
+                const SizedBox(
                   height: 25,
                 ),
-                Container(
-                  height: 58,
-                  width: 58 + 200,
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(8),
-                    gradient: LinearGradient(
-                      colors: [Color(0xFFDA22FF), Color(0xFF9733EE)],
+                GestureDetector(
+                  onTap: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(builder: (context) => const RegisterNew(),
+                      ),
+                    );
+                  },
+                  child: Container(
+                    height: 58,
+                    width: 58 + 200,
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(8),
+                      gradient: const LinearGradient(
+                        colors: [Color(0xFFDA22FF), Color(0xFF9733EE)],
+                      ),
+                      boxShadow: [
+                        BoxShadow(
+                          color: const Color(0xFF9733EE).withOpacity(0.5),
+                          spreadRadius: 2,
+                          blurRadius: 10,
+                          offset: const Offset(0, 3),
+                        ),
+                      ],
                     ),
-                    boxShadow: [
-                      BoxShadow(
-                        color: Color(0xFF9733EE).withOpacity(0.5),
-                        spreadRadius: 2,
-                        blurRadius: 10,
-                        offset: Offset(0, 3),
-                      ),
-                    ],
-                  ),
-                  child: Padding(
-                    padding: EdgeInsets.only(left: 16.0, right: 16.0),
-                    child: GestureDetector(
-                      onTap: () {
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(builder: (context) => RegisterNew(),
+                    child: Padding(
+                        padding: const EdgeInsets.only(left: 16.0, right: 16.0),
+                        child: GestureDetector(
+                          onTap: () {
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(builder: (context) => const RegisterNew(),
+                              ),
+                            );
+                          },
+                          child: const Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              Text(
+                                'Register Now',
+                                style: TextStyle(
+                                  color: Colors.white,
+                                  fontSize: 18,
+                                  fontWeight: FontWeight.w500,
+                                ),
+                              ),
+                              Icon(Icons.arrow_forward_rounded, color: Colors.white),
+                            ],
                           ),
-                        );
-                      },
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          Text(
-                            'Register Now',
-                            style: TextStyle(
-                              color: Colors.white,
-                              fontSize: 18,
-                              fontWeight: FontWeight.w500,
-                            ),
-                          ),
-                          Icon(Icons.arrow_forward_rounded, color: Colors.white),
-                        ],
-                      ),
-                    )
+                        )
+                    ),
                   ),
                 ),
                 Column(
@@ -290,7 +299,7 @@ class _WelcomeTwoState extends State<WelcomeTwo> {
                       onTap: () {
                         Navigator.push(
                           context,
-                          MaterialPageRoute(builder: (context) => SignIn(),
+                          MaterialPageRoute(builder: (context) => const SignIn(),
                           ),
                         );
                       },
@@ -317,7 +326,7 @@ class _WelcomeTwoState extends State<WelcomeTwo> {
           ),
           children: [
             TextSpan(
-              text: '${AppLocalizations.of(context)!.donthaveaccountlabel} ',
+              text: '${AppLocalizations.of(context)!.donthaveaccountlabel}',
               style: GoogleFonts.nunito(
                 fontWeight: FontWeight.w600,
               ),

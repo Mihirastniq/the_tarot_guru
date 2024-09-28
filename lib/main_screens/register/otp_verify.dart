@@ -1,14 +1,15 @@
+import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:the_tarot_guru/main_screens/register/language.dart';
-import 'pin_set.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:http/http.dart' as http;
+import 'package:the_tarot_guru/main_screens/warnings/please_wait_popup.dart';
 
 class OTPVerifyPageState extends StatefulWidget {
-
   final Map<String, dynamic> response;
   OTPVerifyPageState(this.response);
-
 
   @override
   _OtpState createState() => _OtpState();
@@ -25,6 +26,8 @@ class _OtpState extends State<OTPVerifyPageState> {
   late FocusNode _focusNode2;
   late FocusNode _focusNode3;
   late FocusNode _focusNode4;
+  String LOGINKEY = "isLogin";
+  bool? isLogin = false;
 
   @override
   void initState() {
@@ -36,24 +39,87 @@ class _OtpState extends State<OTPVerifyPageState> {
     _focusNode4 = FocusNode();
   }
 
+  Future<void> _showPleaseWaitDialog() async {
+    return showDialog<void>(
+      context: context,
+      barrierDismissible: false,
+      builder: (BuildContext context) {
+        return PleaseWaitDialog();
+      },
+    );
+  }
+
+  void _hidePleaseWaitDialog() {
+    Navigator.of(context).pop();
+  }
+
   void _onContinuePress() async {
     String pin = _controller1.text + _controller2.text + _controller3.text + _controller4.text;
-
+    SharedPreferences prefs = await SharedPreferences.getInstance();
     int otpFromResponse = widget.response['otp']; // Get the OTP from the response object
     String otpFromResponseString = otpFromResponse.toString(); // Convert it to a string
+
     if (pin == otpFromResponseString) { // Compare the entered OTP with the OTP from the response
       widget.response['otp_status'] = 'match';
-      widget.response['appPin'] = 0000;
-      Navigator.push(
-        context,
-        MaterialPageRoute(builder: (context) => LanguageSelection(response: widget.response)),
-      );
+      _showPleaseWaitDialog();
+      try {
+        String uri = "https://thetarotguru.com/tarotapi/testing/userverifaction.php";
+        var requestBody = jsonEncode(widget.response);
+        var res = await http.post(Uri.parse(uri), body: requestBody);
+        var response = jsonDecode(res.body);
+        print('Response is : ${response}');
+        if (response["status"] == 'success') {
+          // Handle the response data correctly
+          var user = response['user'];
+          prefs.setString('firstName', user['firstname']);
+          prefs.setString('lastName', user['lastname']);
+          prefs.setString('email', user['email']);
+          prefs.setInt('userid', int.parse(user['id']));
+          prefs.setInt('phone', int.parse(user['phone'])); // Store phone as a string
+          prefs.setBool(LOGINKEY, true);
+          prefs.setInt('subscription_status', int.parse(user['subscription_status'] ?? '0'));
+          prefs.setInt('free_by_admin', int.parse(user['free_by_admin'] ?? '0'));
+          prefs.setInt('warning', int.parse(user['warning'] ?? '0'));
+          prefs.setInt('trial_warning', int.parse(user['trial_warning'] ?? '1'));
+
+          Fluttertoast.showToast(
+            msg: "Verification Successful",
+            toastLength: Toast.LENGTH_LONG,
+            gravity: ToastGravity.BOTTOM,
+            backgroundColor: Colors.green,
+            textColor: Colors.white,
+            fontSize: 16.0,
+          );
+          _hidePleaseWaitDialog(); // Hide the dialog before navigating
+          _navigateToLanguageSelect();
+        } else {
+          Fluttertoast.showToast(
+            msg: "${response['message']}",
+            toastLength: Toast.LENGTH_LONG,
+            gravity: ToastGravity.BOTTOM,
+            backgroundColor: Colors.red,
+            textColor: Colors.white,
+            fontSize: 16.0,
+          );
+          _hidePleaseWaitDialog();
+        }
+      } catch (e) {
+        print('Error: $e');
+        Fluttertoast.showToast(
+          msg: "Try again after some time",
+          toastLength: Toast.LENGTH_LONG,
+          gravity: ToastGravity.BOTTOM,
+          backgroundColor: Colors.red,
+          textColor: Colors.white,
+          fontSize: 16.0,
+        );
+        _hidePleaseWaitDialog();
+      }
     } else {
       Fluttertoast.showToast(
         msg: "Incorrect OTP",
-        toastLength: Toast.LENGTH_SHORT,
-        gravity: ToastGravity.CENTER,
-        timeInSecForIosWeb: 15,
+        toastLength: Toast.LENGTH_LONG,
+        gravity: ToastGravity.BOTTOM,
         backgroundColor: Colors.red,
         textColor: Colors.white,
         fontSize: 16.0,
@@ -62,10 +128,16 @@ class _OtpState extends State<OTPVerifyPageState> {
         otpflag = true;
         pin = '';
       });
+      _hidePleaseWaitDialog();
     }
-
   }
 
+  void _navigateToLanguageSelect() {
+    Navigator.pushReplacement(
+      context,
+      MaterialPageRoute(builder: (context) => LanguageSelection()),
+    );
+  }
 
   @override
   void dispose() {
@@ -119,13 +191,11 @@ class _OtpState extends State<OTPVerifyPageState> {
                     width: 200,
                     height: 200,
                     decoration: BoxDecoration(
-                      // color: Colors.deepPurple.shade50,
                       shape: BoxShape.circle,
                     ),
                     child: Image.asset(
                       'assets/images/intro/logo.png',
                     ),
-                    // child: Text('logo',style: TextStyle(fontSize: 20),),
                   ),
                   SizedBox(
                     height: 24,
@@ -173,11 +243,10 @@ class _OtpState extends State<OTPVerifyPageState> {
                             Expanded(child: _textFieldOTP(first: false, last: true, controller: _controller4, focusNode: _focusNode4)),
                           ],
                         ),
-
                         SizedBox(
                           height: 22,
                         ),
-                        otpflag == true ? Text('Wrong OTP', style: TextStyle(color: Colors.red,fontSize: 16),) : SizedBox( height: 1,),
+                        otpflag == true ? Text('Wrong OTP', style: TextStyle(color: Colors.red, fontSize: 16),) : SizedBox(height: 1,),
                         SizedBox(height: 20,),
                         SizedBox(
                           width: double.infinity,
@@ -195,7 +264,7 @@ class _OtpState extends State<OTPVerifyPageState> {
                             child: Padding(
                               padding: EdgeInsets.all(14.0),
                               child: Text(
-                                '${AppLocalizations.of(context)!.verifylabel}',
+                                'Continue',
                                 style: TextStyle(fontSize: 16),
                               ),
                             ),
@@ -208,43 +277,44 @@ class _OtpState extends State<OTPVerifyPageState> {
               ),
             ),
           ),
-        )
+        ),
       ),
     );
   }
-  Widget _textFieldOTP({bool first = false, bool last = false, required TextEditingController controller, required FocusNode focusNode}) {
-    return Container(
-      height: 85,
-      width: 85,
+
+  Widget _textFieldOTP({required bool first, last, required TextEditingController controller, required FocusNode focusNode}) {
+    return SizedBox(
+      height: 80,
       child: AspectRatio(
         aspectRatio: 1.0,
         child: TextField(
-          autofocus: first, // Autofocus on the first field
           controller: controller,
-          focusNode: focusNode, // Pass the focus node
+          autofocus: true,
+          focusNode: focusNode,
           onChanged: (value) {
-            if (value.isNotEmpty && !last) {
-              // If the current field is not the last one and becomes non-empty, move focus to the next field
+            if (value.length == 1 && last == false) {
               FocusScope.of(context).nextFocus();
-            } else if (value.isEmpty && !first) {
-              // If the current field is not the first one and becomes empty, move focus to the previous field
+            }
+            if (value.length == 0 && first == false) {
               FocusScope.of(context).previousFocus();
             }
           },
           showCursor: false,
           readOnly: false,
           textAlign: TextAlign.center,
-          style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
+          style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold, color: Colors.black),
           keyboardType: TextInputType.number,
           maxLength: 1,
           decoration: InputDecoration(
             counter: Offstage(),
             enabledBorder: OutlineInputBorder(
-                borderSide: BorderSide(width: 2, color: Colors.black12),
-                borderRadius: BorderRadius.circular(12)),
+              borderSide: BorderSide(width: 2, color: Colors.black12),
+              borderRadius: BorderRadius.circular(12),
+            ),
             focusedBorder: OutlineInputBorder(
-                borderSide: BorderSide(width: 2, color: Colors.purple),
-                borderRadius: BorderRadius.circular(12)),
+              borderSide: BorderSide(width: 2, color: Colors.purple),
+              borderRadius: BorderRadius.circular(12),
+            ),
           ),
         ),
       ),

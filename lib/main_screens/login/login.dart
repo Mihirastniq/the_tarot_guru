@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:the_tarot_guru/main_screens/Register/registernew.dart';
+import 'package:the_tarot_guru/main_screens/Register/register.dart';
 import 'package:the_tarot_guru/main_screens/controller/session_controller.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:the_tarot_guru/main_screens/other_screens/forgotpassword.dart';
+import 'package:the_tarot_guru/main_screens/warnings/please_wait_popup.dart';
 
 class SignIn extends StatefulWidget {
   const SignIn({Key? key}) : super(key: key);
@@ -19,6 +20,22 @@ class _SignInFiveState extends State<SignIn> {
   bool _emailflag = false;
   bool _passwordflag = false;
   bool _passwordVisible = false;
+
+  bool isLoading = false;
+
+  Future<void> _showPleaseWaitDialog() async {
+    return showDialog<void>(
+      context: context,
+      barrierDismissible: false,
+      builder: (BuildContext context) {
+        return PleaseWaitDialog();
+      },
+    );
+  }
+
+  void _hidePleaseWaitDialog() {
+    Navigator.of(context).pop();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -377,7 +394,25 @@ class _SignInFiveState extends State<SignIn> {
 
           // Proceed with registration only if all fields are filled
           if (!_emailflag && !_passwordflag) {
+            setState(() {
+              isLoading = true;
+            });
+
+            setState(() {
+              isLoading = true;
+            });
+
+            _showPleaseWaitDialog();
+
             loginController.UserLogin(context);
+
+            setState(() {
+              isLoading = false;
+            });
+
+            _hidePleaseWaitDialog();
+
+            // loginController.UserLogin(context);
           }
         });
 
@@ -440,7 +475,7 @@ class _SignInFiveState extends State<SignIn> {
           ),
           children: [
             TextSpan(
-              text: '${AppLocalizations.of(context)!.donthaveaccountlabel}  ',
+              text: '${AppLocalizations.of(context)!.donthaveaccountlabel}',
               style: GoogleFonts.nunito(
                 fontWeight: FontWeight.w600,
               ),

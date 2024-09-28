@@ -28,7 +28,6 @@ class _MyAppState extends State<MyApp> {
   @override
   Widget build(BuildContext context) {
     Locale defaultLocale = Locale('en');
-
     Locale locale = widget.local != null && widget.local!.isNotEmpty ? Locale(widget.local!) : defaultLocale;
 
 
@@ -42,6 +41,7 @@ class _MyAppState extends State<MyApp> {
           return MaterialApp(
             title: 'The Tarot Guru',
             theme: themeManager.getTheme(),
+            debugShowCheckedModeBanner: false,
             locale: languageProvider.appLocal ?? locale,
             localizationsDelegates: [
               AppLocalizations.delegate,
@@ -57,3 +57,5 @@ class _MyAppState extends State<MyApp> {
     );
   }
 }
+
+ 

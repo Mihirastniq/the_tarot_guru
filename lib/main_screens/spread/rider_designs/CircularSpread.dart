@@ -2,7 +2,6 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flip_card/flip_card_controller.dart';
 import 'package:flutter/services.dart';
-import 'package:the_tarot_guru/main_screens/controller/audio/audio_controller.dart';
 import 'package:the_tarot_guru/main_screens/controller/functions.dart';
 import 'package:the_tarot_guru/main_screens/reuseable_blocks.dart';
 import 'package:the_tarot_guru/main_screens/spread/rider_spread_details.dart';
@@ -40,7 +39,6 @@ class _RiderCircularCardScreenState extends State<RiderCircularCardScreen> {
   late FlipCardController _card11Controller;
   late FlipCardController _card12Controller;
   late FlipCardController _card13Controller;
-  late final AudioController _audioController;
 
   bool allCardsFlipped = false;
   List<dynamic> cardData = [];
@@ -157,7 +155,6 @@ class _RiderCircularCardScreenState extends State<RiderCircularCardScreen> {
   void initState() {
     super.initState();
 
-    _audioController = AudioController();
     _card1Controller = FlipCardController();
     _card2Controller = FlipCardController();
     _card3Controller = FlipCardController();

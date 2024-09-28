@@ -50,7 +50,6 @@ class _SubscribeAppState extends State<SubscribeApp> {
 
   void _handlePaymentSuccess(PaymentSuccessResponse response) async {
 
-    String? paymentId = response.paymentId;
     SharedPreferences prefs = await SharedPreferences.getInstance();
 
     var url = 'https://thetarotguru.com/tarotapi/subscription.php';

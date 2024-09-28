@@ -36,7 +36,6 @@ class _ProductDetailsState extends State<ProductInfoScreen>
   int TotalSold = 0;
   int OrderValue = 0;
 
-  CartService _cartService = CartService();
 
   @override
   void initState() {

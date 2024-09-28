@@ -131,57 +131,75 @@ class _ProductsState extends State<Products> {
                 ),
               );
             },
-            child: Row(
-              crossAxisAlignment: CrossAxisAlignment.center,
+            child: Column(
               children: [
-                Padding(
-                  padding: EdgeInsets.all(10),
-                  child: ClipRRect(
-                    borderRadius: BorderRadius.circular(10),
-                    child: Image.network(
-                      '${firstImageUrl}',
-                      fit: BoxFit.cover,
-                      width: 80,
+                Row(
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: [
+                    Padding(
+                      padding: EdgeInsets.all(10),
+                      child: ClipRRect(
+                        borderRadius: BorderRadius.circular(10),
+                        child: Image.network(
+                          '${firstImageUrl}',
+                          fit: BoxFit.cover,
+                          width: 80,
+                        ),
+                      ),
                     ),
-                  ),
-                ),
-                SizedBox(width: 10),
-                Expanded(
-                  child: Container(
-                    padding: EdgeInsets.fromLTRB(0, 5, 5, 0),
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Text(
-                          product['title'] ?? '',
-                          style: const TextStyle(
-                            color: Colors.white,
-                            fontSize: 22.0,
-                            fontWeight: FontWeight.bold,
-                          ),
+                    SizedBox(width: 10),
+                    Expanded(
+                      child: Container(
+                        padding: EdgeInsets.fromLTRB(0, 5, 5, 0),
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Text(
+                              product['title'] ?? '',
+                              style: const TextStyle(
+                                color: Colors.white,
+                                fontSize: 22.0,
+                                fontWeight: FontWeight.bold,
+                              ),
+                            ),
+                            SizedBox(height: 5),
+                            Text(
+                              product['description'] ?? '',
+                              maxLines: 3,
+                              overflow: TextOverflow.ellipsis,
+                              style: TextStyle(color: Colors.white),
+                            ),
+                            SizedBox(height: 15),
+                            Text(
+                              "${AppLocalizations.of(context)!.pricelabel} : \₹${product['price'] ?? ''}",
+                              style: TextStyle(
+                                color: Colors.white,
+                                fontSize: 20,
+                              ),
+                            ),
+                            SizedBox(height: 15),
+                          ],
                         ),
-                        SizedBox(height: 5),
-                        Text(
-                          product['description'] ?? '',
-                          maxLines: 3,
-                          overflow: TextOverflow.ellipsis,
-                          style: TextStyle(color: Colors.white),
-                        ),
-                        SizedBox(height: 15),
-                        Text(
-                          "${AppLocalizations.of(context)!.pricelabel} : \₹${product['price'] ?? ''}",
-                          style: TextStyle(
-                            color: Colors.white,
-                            fontSize: 20,
-                          ),
-                        ),
-                        SizedBox(height: 15),
-                      ],
+                      ),
                     ),
-                  ),
+                  ],
                 ),
+                Container(
+                  alignment: Alignment.center,
+                  decoration: BoxDecoration(
+                      color: Colors.white,
+                    borderRadius: BorderRadius.only(bottomLeft: Radius.circular(10),bottomRight: Radius.circular(10))
+                  ),
+                  height: MediaQuery.sizeOf(context).height * 0.04,
+                  width: double.maxFinite,
+
+                  child: Text('Available Qty: ${product['qty']}',style: TextStyle(
+                    fontWeight: FontWeight.w800,
+                    fontSize: 18
+                  ),),
+                )
               ],
-            ),
+            )
           ),
         ),
       ),

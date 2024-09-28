@@ -101,7 +101,7 @@
 //                   height: 24,
 //                 ),
 //                 Text(
-//                   '${AppLocalizations.of(context)!.pinentrylabel}',
+//                   ${AppLocalizations.of(context)!.pinentrylabel},
 //                   style: TextStyle(
 //                     fontSize: 30,
 //                     color: Colors.white,

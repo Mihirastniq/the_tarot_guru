@@ -39,10 +39,7 @@ class LoginController {
           prefs.setString('lastName', response['lastName']);
           prefs.setString('email', response['email']);
           prefs.setInt('phone', int.parse(response['phone']));
-          // prefs.setInt('appPin', int.parse(response['appPin']));
-          prefs.setBool('enablePin', false);
           prefs.setInt('userid', int.parse(response['userid']));
-          prefs.setString('created_at', response['created_at']);
           prefs.setInt('subscription_status', int.parse(response['subscription_status']));
           prefs.setInt('free_by_admin', int.parse(response['free_by_admin']));
           prefs.setInt('warning', int.parse(response['warning']));
@@ -53,7 +50,7 @@ class LoginController {
             toastLength: Toast.LENGTH_SHORT,
             gravity: ToastGravity.BOTTOM,
             timeInSecForIosWeb: 15,
-            backgroundColor: Colors.grey,
+            backgroundColor: Colors.black,
             textColor: Colors.white,
             fontSize: 16.0,
           );
@@ -64,13 +61,21 @@ class LoginController {
             toastLength: Toast.LENGTH_SHORT,
             gravity: ToastGravity.BOTTOM,
             timeInSecForIosWeb: 15,
-            backgroundColor: Colors.grey,
+            backgroundColor: Colors.black,
             textColor: Colors.white,
             fontSize: 16.0,
           );
         }
       } catch (e) {
-        print("Error: $e");
+        Fluttertoast.showToast(
+          msg: "Internal Server Error",
+          toastLength: Toast.LENGTH_SHORT,
+          gravity: ToastGravity.BOTTOM,
+          timeInSecForIosWeb: 15,
+          backgroundColor: Colors.black,
+          textColor: Colors.white,
+          fontSize: 16.0,
+        );
       }
     } else {
       Fluttertoast.showToast(

@@ -42,14 +42,6 @@ class _LanguageSelectionScreenState extends State<LanguageSelectionScreen> {
 
   @override
   Widget build(BuildContext context) {
-    int _selectedIndex = 0;
-
-    void _onItemTapped(int index) {
-      setState(() {
-        _selectedIndex = index;
-      });
-    }
-
     Future<void> _setSelectedLanguage(String languageCode) async {
       Locale locale = Locale(languageCode);
       await _languageChangeController.changelanguage(locale);
@@ -124,7 +116,7 @@ class _LanguageSelectionScreenState extends State<LanguageSelectionScreen> {
 
                       return RadioListTile(
                         title: Text(
-                          languageName!,
+                          languageName,
                           style: TextStyle(color: Colors.white),
                         ),
                         activeColor: Colors.white,

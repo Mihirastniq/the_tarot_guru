@@ -4,7 +4,7 @@ import 'package:fluttertoast/fluttertoast.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:http/http.dart' as http;
-import 'package:the_tarot_guru/main_screens/Login/loginnew.dart';
+import 'package:the_tarot_guru/main_screens/Login/login.dart';
 
 class SetNewPasswordScreen extends StatefulWidget {
   final String email;

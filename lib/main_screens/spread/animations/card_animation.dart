@@ -32,11 +32,9 @@ class PositionedCardFinal extends StatefulWidget {
 }
 
 class _PositionedCardFinalState extends State<PositionedCardFinal> with SingleTickerProviderStateMixin {
-  bool _hasFlipped = false;
 
   late AnimationController _controller;
   Animation<Offset>? _animation;
-  bool _isFront = true;
 
 
   @override

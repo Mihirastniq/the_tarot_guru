@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flip_card/flip_card_controller.dart';
 import 'package:flutter/services.dart';
-import 'package:the_tarot_guru/main_screens/controller/audio/audio_controller.dart';
 import 'package:the_tarot_guru/main_screens/reuseable_blocks.dart';
 import '../ActiveSpread.dart';
 import '../osho_spread_details.dart';

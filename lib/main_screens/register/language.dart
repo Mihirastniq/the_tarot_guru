@@ -9,20 +9,15 @@ import 'package:http/http.dart' as http;
 import 'package:the_tarot_guru/home.dart';
 import 'package:the_tarot_guru/main_screens/controller/language_controller/language_change_handler.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:the_tarot_guru/main_screens/warnings/please_wait_popup.dart';
 
 class LanguageSelection extends StatefulWidget {
-  final Map<String, dynamic> response;
-
-  LanguageSelection({required this.response});
 
   @override
   _LanguageSelectionState createState() => _LanguageSelectionState();
 }
 
 class _LanguageSelectionState extends State<LanguageSelection> {
-  // String _selectedLanguage = 'en';
-  String LOGINKEY = "isLogin";
-  bool? isLogin = false;
   late LanguageChangeController _languageChangeController;
 
   @override
@@ -42,60 +37,11 @@ class _LanguageSelectionState extends State<LanguageSelection> {
   Future<void> updaterecord() async {
     final SharedPreferences prefs = await SharedPreferences.getInstance();
     if (selectedLanguageKey!.isNotEmpty) {
+      _showPleaseWaitDialog();
       Locale locale = Locale(selectedLanguageKey!);
       await _languageChangeController.changelanguage(locale);
-      widget.response['language'] = selectedLanguageKey;
-      try {
-        String uri = "https://thetarotguru.com/tarotapi/userverifaction.php";
-        var requestBody = jsonEncode(widget.response);
-        var res = await http.post(Uri.parse(uri), body: requestBody);
-        var response = jsonDecode(res.body);
-        if (response["status"] == 'success') {
-          prefs.setBool(LOGINKEY, true);
-          prefs.setString('firstName', response['firstName']);
-          prefs.setString('lastName', response['lastName']);
-          prefs.setString('email', response['email']);
-          // prefs.setInt('appPin', int.parse(response['appPin']));
-          prefs.setInt('userid', int.parse(response['userid']));
-          prefs.setString('lang', selectedLanguageKey??'en');
-          prefs.setString('created_at', response['created_at']['created_at']);
-          prefs.setInt('subscription_status', response['subscription_status']);
-          prefs.setInt('free_by_admin', response['free_by_admin']);
-          prefs.setInt('warning', response['warning']);
-          prefs.setInt('trial_warning', int.parse(response['trial_warning']));
-          prefs.setBool('enablePin', false);
-          _navigateToAppSelect();
-        } else {
-          Fluttertoast.showToast(
-            msg: "Try again after some time",
-            toastLength: Toast.LENGTH_SHORT,
-            gravity: ToastGravity.CENTER,
-            timeInSecForIosWeb: 15,
-            backgroundColor: Colors.red,
-            textColor: Colors.white,
-            fontSize: 16.0,
-          );
-        }
-        Fluttertoast.showToast(
-          msg: "Verification Successful",
-          toastLength: Toast.LENGTH_SHORT,
-          gravity: ToastGravity.CENTER,
-          timeInSecForIosWeb: 15,
-          backgroundColor: Colors.red,
-          textColor: Colors.white,
-          fontSize: 16.0,
-        );
-      } catch (e) {
-        Fluttertoast.showToast(
-          msg: "Try again after some time",
-          toastLength: Toast.LENGTH_SHORT,
-          gravity: ToastGravity.CENTER,
-          timeInSecForIosWeb: 15,
-          backgroundColor: Colors.red,
-          textColor: Colors.white,
-          fontSize: 16.0,
-        );
-      }
+
+      _navigateToAppSelect();
     } else {
       Fluttertoast.showToast(
         msg: "Select your Language",
@@ -107,6 +53,20 @@ class _LanguageSelectionState extends State<LanguageSelection> {
         fontSize: 16.0,
       );
     }
+  }
+
+  Future<void> _showPleaseWaitDialog() async {
+    return showDialog<void>(
+      context: context,
+      barrierDismissible: false,
+      builder: (BuildContext context) {
+        return PleaseWaitDialog();
+      },
+    );
+  }
+
+  void _hidePleaseWaitDialog() {
+    Navigator.of(context).pop();
   }
 
   void _navigateToAppSelect() {
@@ -244,15 +204,22 @@ class _LanguageSelectionState extends State<LanguageSelection> {
                         color: const Color(0xFFFFFFFF),
                       ),
                       child: Text(
-                          '${AppLocalizations.of(context)!.singin}'
+                         ' ${AppLocalizations.of(context)!.singin}'
                       ),
                     ),
                     onTap: () {
                       if (selectedLanguageKey != null && selectedLanguageKey!.isNotEmpty) {
                         updaterecord();
-                        print(selectedLanguageKey);
                       } else {
-                        print('Please select a language');
+                        Fluttertoast.showToast(
+                          msg: "Please Select Your Language",
+                          toastLength: Toast.LENGTH_SHORT,
+                          gravity: ToastGravity.CENTER,
+                          timeInSecForIosWeb: 15,
+                          backgroundColor: Colors.red,
+                          textColor: Colors.white,
+                          fontSize: 16.0,
+                        );
                       }
                     },
                   )

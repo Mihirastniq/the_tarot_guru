@@ -734,5 +734,21 @@
   "selectfontsizelabel": "Select Font Size",
   "@selectfontsizelabel" : {
     "description": "Help and Support text"
+  },
+  "sprecialpredictionlabel": "Special Prediction",
+  "@sprecialpredictionlabel" : {
+    "description": "Special Prediction"
+  },
+  "learninglabel": "Start Learning",
+  "@learninglabel" : {
+    "description": "Start Learning"
+  },
+  "oshodetailformtitle": "Let's Start something",
+  "@oshodetailformtitle" : {
+    "description": "Let's Start something"
+  },
+  "oshodetailformsubtitle": "Please give basic details",
+  "@oshodetailformsubtitle" : {
+    "description": "Please give basic details"
   }
 }

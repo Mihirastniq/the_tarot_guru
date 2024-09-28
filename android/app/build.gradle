@@ -59,8 +59,8 @@ android {
 
     defaultConfig {
         applicationId "com.thetarotguru.the_tarot_guru"
-        minSdkVersion 21
-        targetSdkVersion flutter.targetSdkVersion
+        minSdkVersion 24
+        targetSdkVersion 34
         versionCode flutterVersionCode.toInteger()
         versionName flutterVersionName
     }
